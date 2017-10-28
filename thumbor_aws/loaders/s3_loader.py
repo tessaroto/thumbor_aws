@@ -6,6 +6,7 @@ import urllib2
 
 import thumbor_aws.connection
 import thumbor.loaders.http_loader as http_loader
+from tornado.concurrent import return_future
 
 def _get_bucket(url):
     """
@@ -29,7 +30,7 @@ def _validate_bucket(context,bucket):
 
     return False
 
-
+@return_future
 def load(context, url, callback):
     
     enable_http_loader = context.config.get('AWS_ENABLE_HTTP_LOADER', default=False)
