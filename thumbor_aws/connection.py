@@ -11,8 +11,10 @@ def get_connection(context):
             conn = S3Connection()
         else:
             conn = S3Connection(
-                context.config.get('AWS_ACCESS_KEY'),
-                context.config.get('AWS_SECRET_KEY')
+                aws_access_key_id = context.config.get('AWS_ACCESS_KEY'),
+                aws_secret_access_key = context.config.get('AWS_SECRET_KEY'),
+                host = context.config.get('AWS_HOST'),
+                is_secure = context.config.get('AWS_IS_SECURE', default=False)
             )
 
     return conn
