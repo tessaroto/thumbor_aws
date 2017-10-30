@@ -11,7 +11,10 @@ Additional Configuration values used:
     AWS_ACCESS_KEY = ""
     # the Amazon Web Services secret of the used access key
     AWS_SECRET_KEY = ""
-
+    # the host of server, by default is AWS host
+    AWS_HOST = ""
+    # the secure connection, by default is False 
+    AWS_IS_SECURE = ""
 
 
     # configuration settings specific for the s3_loader
