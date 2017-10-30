@@ -41,13 +41,16 @@ def load(context, url, callback):
         return http_loader.load(context, url, callback)
       
     url = urllib2.unquote(url)
-    
-    if context.config.S3_LOADER_BUCKET:
+
+    if context.config.get('S3_LOADER_BUCKET', default=None):
         bucket = context.config.S3_LOADER_BUCKET
     else:
         bucket, url = _get_bucket(url)
         if not _validate_bucket(context, bucket):
-            return callback(None)
+            result = LoaderResult()
+            result.error = LoaderResult.ERROR_NOT_FOUND
+            result.successful = False
+            return callback(result)
 
     bucket_loader = Bucket(
         connection=thumbor_aws.connection.get_connection(context),

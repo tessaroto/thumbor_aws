@@ -15,6 +15,7 @@ def get_connection(context):
                 aws_access_key_id = context.config.get('AWS_ACCESS_KEY'),
                 aws_secret_access_key = context.config.get('AWS_SECRET_KEY'),
                 host = context.config.get('AWS_HOST', default=NoHostProvided),
+                port = context.config.get('AWS_PORT', default=None),
                 is_secure = context.config.get('AWS_IS_SECURE', default=False)
             )
 
