@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import boto
 from boto.s3.connection import S3Connection
 from boto.s3.connection import NoHostProvided
 
@@ -16,7 +17,8 @@ def get_connection(context):
                 aws_secret_access_key = context.config.get('AWS_SECRET_KEY'),
                 host = context.config.get('AWS_HOST', default=NoHostProvided),
                 port = context.config.get('AWS_PORT', default=None),
-                is_secure = context.config.get('AWS_IS_SECURE', default=False)
+                is_secure = context.config.get('AWS_IS_SECURE', default=False),
+                calling_format = boto.s3.connection.OrdinaryCallingFormat()
             )
 
     return conn
