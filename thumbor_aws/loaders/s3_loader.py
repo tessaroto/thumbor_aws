@@ -6,7 +6,9 @@ import urllib2
 
 import thumbor_aws.connection
 import thumbor.loaders.http_loader as http_loader
+from thumbor.loaders import LoaderResult
 from tornado.concurrent import return_future
+
 
 def _get_bucket(url):
     """
@@ -53,7 +55,11 @@ def load(context, url, callback):
     )
 
     file_key = bucket_loader.get_key(url)
+
     if not file_key:
-        return callback(None)
+        result = LoaderResult()
+        result.error = LoaderResult.ERROR_NOT_FOUND
+        result.successful = False
+        return callback(result)
 
     return callback(file_key.read())
